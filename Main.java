@@ -299,7 +299,9 @@ public class Main {
      
      
         
-        int minuto, minutos, segundos, milisegundos;
+         
+        int minuto, minutos, segundos, milisegundos, lineas;
+        lineas = 10;
         minuto = 0;
         minutos = 0;
         segundos = 0;
@@ -313,7 +315,7 @@ public class Main {
         boolean usado1 = false;
         boolean usado2 = false;
         if(start==true)
-        while(minuto != 9 || minutos != 9) {
+        	while(minuto != 2 || minutos != 5) {
         	
         	if(cartasP[0].isVisible() == false || score ==21){
         		JOptionPane.showMessageDialog(null, "has Ganado!!!!!");
@@ -360,12 +362,15 @@ public class Main {
             	
             	}
             	else if((Integer.valueOf(Valor1.getText())) >= 22){
-            		if(x<=18){
+            		if(obj.MazoID(x) != obj.MazoID(18)){
             		Valores[0]=obj.MazoNum(x);
+            		//JOptionPane.showMessageDialog(null, obj.MazoNum(x));
             		usado1=true;}
             		
-            		if(x>18){
-                		Valores[0]=obj.MazoNum(a);
+            		 if(obj.MazoID(x) == obj.MazoID(18) /*&& Rond2[a]!=-1*/){
+                		Valores[0]=obj.MazoNum(Rond2[a]);
+          
+                		//JOptionPane.showMessageDialog(null, obj.MazoNum(Rond2[a]));
                 		usado1=true;}
             	}
             	Borrar[0] =Integer.valueOf(Valor1.getText());
@@ -381,13 +386,16 @@ public class Main {
             	
             	}
             	else if((Integer.valueOf(Valor1.getText())) >= 22){
-            		if(x<=18){
+            		if(obj.MazoID(x) != obj.MazoID(18)){
             		Valores[1]=obj.MazoNum(x);
             		usado2 = true;}
+            		 if(obj.MazoID(x) == obj.MazoID(18)/* && Rond2[a]!=-1*/){
+            			
+            		Valores[1]=obj.MazoNum(Rond2[a]);
+                	usado2 = true;
+            		}
             		
-            		if(x>18){
-                		Valores[1]=obj.MazoNum(a);
-                		usado2 = true;}
+            	
             		
             	}
             	Borrar[1] = (Integer.valueOf(Valor1.getText()));
@@ -404,6 +412,21 @@ public class Main {
             	Valores[0]= 0;
             	score++;
             }
+            if(Valores[0]==10 && usado1 == true){
+            	JOptionPane.showMessageDialog(null, "Es igual a 10!");
+         
+            	
+            	Valor1.setText("");
+            	Valores[0]= 0;
+            	if(obj.MazoID(x) != obj.MazoID(18)){
+            	x= x +1;
+            	cartasM.setIcon(new ImageIcon(obj.MazoID(x)+".jpg"));
+            	}
+            	  
+            	 if(obj.MazoID(x) == obj.MazoID(18) ){
+            	a=a+1;
+    			cartasM.setIcon(new ImageIcon(Rond2[a]+".jpg"));  
+            }}
             
             
             
@@ -422,15 +445,16 @@ public class Main {
             		score++;
             		}
             		else if(usado1==true){
-            			if(x<18){
+            			if(obj.MazoID(x) != obj.MazoID(18)){
             			x= x +1;
             			cartasM.setIcon(new ImageIcon(obj.MazoID(x)+".jpg"));  
             			}
             			
             			
-            			if(x>18){
-            				a++;
-            				cartasM.setIcon(new ImageIcon(obj.MazoID(a)+".jpg"));
+            			 if(obj.MazoID(x) == obj.MazoID(18)){
+            				
+            				a=a+1;
+            				cartasM.setIcon(new ImageIcon(Rond2[a]+".jpg"));
             				
             			}
             			
@@ -441,16 +465,16 @@ public class Main {
             		cartasP[Borrar[1]].setVisible(false);
             		score++;}
             		else if(usado2==true){
-            			if(x<18){
+            			if(obj.MazoID(x) != obj.MazoID(18)){
             			x= x +1;
             			cartasM.setIcon(new ImageIcon(obj.MazoID(x)+".jpg")); 
             			}
             			
             			
             			
-            			if(x>18){
-            				a++;
-            				cartasM.setIcon(new ImageIcon(obj.MazoID(a)+".jpg"));
+            			 if(obj.MazoID(x) == obj.MazoID(18) /*&& Rond2[a]!=-1*/){
+            				 x= x +1;
+            				cartasM.setIcon(new ImageIcon(Rond2[a]+".jpg"));
             				
             			}
             			
@@ -461,6 +485,8 @@ public class Main {
                     Valores[1]= 0;
             		
             	}
+            	
+            	
             	if(Suma != 10){
             		JOptionPane.showMessageDialog(null, "No te da resultado de 10!");
             		Valores[0]= 0;
@@ -469,35 +495,62 @@ public class Main {
             	
             }
             
-               	
-            Thread.sleep(1000);
-            milisegundos = milisegundos + 1;
-            if(milisegundos > 9) {
-                milisegundos = 0;
-                segundos = segundos + 1;
-            }
-            if(segundos > 5) {
-                segundos = 0;
-                minutos = minutos + 1;
-            }
-            if(minutos > 9) {
-                minutos = 0;
-                minuto = minuto + 1;
-            }
-            
-			tempor.setText(null);
+               
+			Thread.sleep(1000);
+	        milisegundos = milisegundos + 1;
+	        if(milisegundos > 9) {
+	            milisegundos = 0;
+	            segundos = segundos + 1;
+	        }
+	        if(segundos > 5) {
+	            segundos = 0;
+	            minutos = minutos + 1;
+	        }
+	        if(minutos > 9) {
+	            minutos = 0;
+	            minuto = minuto + 1;
+	        }
+	        
+	        for (int i=0; i < lineas; i++)
+	        {
+	        System.out.println("");
+	        }
+	    	tempor.setText(null);
 			puntua.setText(String.valueOf(score));
 			
 			tempor.append(String.valueOf(minuto)+ String.valueOf(minutos)+  ":" + String.valueOf(segundos)+ String.valueOf(milisegundos));
 			
-			 if(minuto == 9 && minutos == 9) {
-	                System.out.println("Tiempo agotado");
-	            }
-       
-			 
-			 
-			 
-			 
-	}}}
-	
+	        
+	        }
+	     
+	            
+	        
+	            
+	            JFrame ventana = new JFrame("¡Tiempo agotado!");
+	            ventana.setSize(250,100);
+	            ventana.setLocationRelativeTo(null);
+	            ventana.setVisible(true);
+	            ventana.setLayout(null);
+	            ventana.getContentPane().setBackground(new java.awt.Color(0, 102, 0));
+	            
+	            final JButton boton = new JButton("Ok");
+	            boton.setBounds(80,5,90,50);
+	            boton.setFocusable(false);
+	            //boton.setBackground(java.awt.Color.red);
+	            ventana.add(boton);
+	          
+	        
+	            boton.addActionListener(new ActionListener(){
+	                public void actionPerformed(ActionEvent e) {
+	             if (e.getSource()==boton) {
+	                    System.exit(0);
+	                }    
+	}});
+		
+	}
 
+
+
+
+
+	}
